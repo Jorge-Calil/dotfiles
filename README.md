@@ -46,24 +46,75 @@ Configuração completa do Neovim com LazyVim:
 - Filesystem
 - Sequential Thinking
 
-## Instalação
+## Instalação Rápida (Recomendado)
 
-### Pré-requisitos
+### Setup Automático com `install.sh`
+
+O script `install.sh` automatiza **todo o processo** de instalação em um único comando:
+
 ```bash
-# Arch Linux
-sudo pacman -S git neovim python postgresql
-
-# Claude Code
-curl -fsSL https://claude.ai/install.sh | sh
-```
-
-### Setup Automático
-```bash
-git clone https://github.com/SEU_USUARIO/dotfiles.git ~/dotfiles
+git clone https://github.com/Jorge-Calil/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 chmod +x install.sh
 ./install.sh
 ```
+
+### O que o script faz automaticamente:
+
+**1. Sistema Base** ✓
+- Instala: git, github-cli, python, pip, neovim, postgresql, base-devel
+- Atualiza pacman
+
+**2. Python** ✓
+- Instala bibliotecas essenciais: pandas, numpy, matplotlib, seaborn, plotly, scipy
+- Configura: pydantic, sqlalchemy, psycopg2-binary, jupyter
+
+**3. Oh My Bash** ✓
+- Instala Oh My Bash (se não instalado)
+- Aplica configurações do tema "cupcake"
+- Configura .bashrc e .bash_profile
+
+**4. Git** ✓
+- Configura user.name e user.email
+- Define branch padrão como "main"
+- Adiciona aliases úteis (st, co, br, lg)
+- Configura editor padrão (nvim)
+
+**5. GitHub CLI** ✓
+- Autentica com GitHub (interativo)
+- Configura acesso para push/pull
+
+**6. Claude Code** ✓
+- Instala Claude Code nativo
+- Copia CLAUDE.md, settings.json, claude.json
+- Instala todas as 3 skills
+- Instala todos os 3 slash commands
+- Faz backup de configs existentes
+
+**7. LazyVim** ✓ (Opcional)
+- Pergunta antes de instalar
+- Faz backup da config existente
+- Copia configuração completa
+- Prepara para instalação de plugins na primeira execução
+
+**8. MCP Servers** ✓ (Opcional)
+- PostgreSQL MCP (com DSN customizável)
+- Jupyter MCP (via uvx)
+- Filesystem MCP
+- Sequential Thinking MCP
+
+**9. Backups** ✓
+- Cria backup timestamped de todas as configs existentes
+- Salva em `~/.dotfiles_backup_YYYYMMDD_HHMMSS`
+
+### Pré-requisitos Mínimos
+
+Apenas Git para clonar o repo:
+```bash
+sudo pacman -S git
+```
+
+Todo o resto é instalado pelo script!
 
 ### Setup Manual
 
@@ -219,4 +270,9 @@ MIT
 
 ## Autor
 
-Seu Nome - [GitHub](https://github.com/SEU_USUARIO)
+Jorge - [@Jorge-Calil](https://github.com/Jorge-Calil)
+
+---
+
+**Stack**: Claude Code • LazyVim • PostgreSQL • Python • Jupyter
+**Otimizado para**: Análise de Dados • Data Science • WSL2 + Arch Linux
