@@ -1,0 +1,26 @@
+# Backups
+*.backup
+*.bak
+*~
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Sensitive
+.env
+*.pem
+*.key
+credentials.json
+
+# LazyVim specific
+nvim/.lazy-lock.json
+nvim/lazy-lock.json
+
+# Temporary
+*.tmp
+*.swp
+*.swo

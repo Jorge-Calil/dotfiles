@@ -1,0 +1,37 @@
+{
+  "env": {
+    "PYTHONPATH": "/root/scripts",
+    "DATA_DIR": "/root/data"
+  },
+  "permissions": {
+    "allow": [
+      "Bash(python:*)",
+      "Bash(python3:*)",
+      "Bash(pip:*)",
+      "Bash(psql:*)",
+      "Bash(jupyter:*)",
+      "Read(/root/data/**)",
+      "Read(/root/notebooks/**)",
+      "Edit(/root/notebooks/**)",
+      "Edit(/root/analysis/**)",
+      "WebFetch",
+      "WebSearch"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 << 'EOF'\nimport json, sys, os\nfrom datetime import datetime\ndata = json.load(sys.stdin)\ncmd = data.get('tool_input', {}).get('command', '')\nif any(x in cmd for x in ['SELECT', 'INSERT', 'UPDATE', 'DELETE', 'psql']):\n  log_file = os.path.expanduser('~/.claude/query-log.txt')\n  os.makedirs(os.path.dirname(log_file), exist_ok=True)\n  with open(log_file, 'a') as f:\n    f.write(f\"{datetime.now().isoformat()} | {cmd[:100]}\\n\")\nif any(x in cmd for x in ['rm -rf', 'DROP TABLE', 'DROP DATABASE', 'DELETE FROM']):\n  print('⚠️ Operação destrutiva detectada. Revisar com cuidado.', file=sys.stderr)\nEOF"
+          }
+        ]
+      }
+    ]
+  },
+  "enabledPlugins": {
+    "pyright-lsp@claude-plugins-official": true
+  }
+}
